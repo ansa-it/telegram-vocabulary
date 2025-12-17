@@ -156,7 +156,7 @@ async def cancel_training(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def list_vocabs(update: Update, context: ContextTypes.DEFAULT_TYPE):
     conn = sqlite3.connect("/app/data/vocab.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT english, german FROM vocab")
+    cursor.execute("SELECT english, german FROM vocab LIMIT 100")
     vocabs = cursor.fetchall()
     conn.close()
 
