@@ -1,7 +1,5 @@
 # Write Dockerfile to build a Docker image for the Python application
 FROM python:3.11-slim
-# Set the working directory
-WORKDIR /app
 # Copy the requirements file into the container
 COPY requirements.txt .
 # Install the required packages
