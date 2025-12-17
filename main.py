@@ -8,7 +8,7 @@ import httpx
 
 # Datenbank initialisieren
 def init_db():
-    conn = sqlite3.connect("/app/data/vocab.db")
+    conn = sqlite3.connect("./data/vocab.db")
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS vocab (
