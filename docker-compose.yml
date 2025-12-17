@@ -1,0 +1,13 @@
+# write a docker compose file for my telegram bot
+version: '3.8'
+services:
+  telegram-bot:
+    build: .
+    container_name: telegram-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_TOKEN}
+      - DEEPL_API_KEY=${DEEPL_API_KEY}
+    volumes:
+      - ./data:/app/data
+    command: python main.py

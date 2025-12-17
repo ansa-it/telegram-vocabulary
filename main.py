@@ -8,7 +8,7 @@ import httpx
 
 # Datenbank initialisieren
 def init_db():
-    conn = sqlite3.connect("vocab.db")
+    conn = sqlite3.connect("/app/data/vocab.db")
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS vocab (
@@ -61,7 +61,7 @@ async def handle_translation(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await update.message.reply_text("Fehler: Es wurde kein englisches Wort gefunden. Bitte starte erneut mit /add.")
         return
 
-    conn = sqlite3.connect("vocab.db")
+    conn = sqlite3.connect("/app/data/vocab.db")
     cursor = conn.cursor()
     cursor.execute("INSERT INTO vocab (english, german) VALUES (?, ?)", (english_word, german_word))
     conn.commit()
@@ -77,7 +77,7 @@ async def train(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Bitte gib eine gültige Anzahl von Fragen ein: /train [ANZAHL]")
         return
 
-    conn = sqlite3.connect("vocab.db")
+    conn = sqlite3.connect("/app/data/vocab.db")
     cursor = conn.cursor()
     cursor.execute("SELECT english, german FROM vocab")
     vocabs = cursor.fetchall()
