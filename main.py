@@ -8,7 +8,7 @@ import httpx
 
 # Datenbank initialisieren
 def init_db():
-    conn = sqlite3.connect("./data/vocab.db")
+    conn = sqlite3.connect("/app/data/vocab.db")
     cursor = conn.cursor()
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS vocab (
@@ -154,7 +154,7 @@ async def cancel_training(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # Liste anzeigen
 async def list_vocabs(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    conn = sqlite3.connect("vocab.db")
+    conn = sqlite3.connect("/app/data/vocab.db")
     cursor = conn.cursor()
     cursor.execute("SELECT english, german FROM vocab")
     vocabs = cursor.fetchall()
@@ -173,7 +173,7 @@ async def search_vocab(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     search_term = " ".join(context.args).lower()
-    conn = sqlite3.connect("vocab.db")
+    conn = sqlite3.connect("/app/data/vocab.db")
     cursor = conn.cursor()
     cursor.execute("SELECT english, german FROM vocab WHERE english LIKE ? OR german LIKE ?", (f"%{search_term}%", f"%{search_term}%"))
     results = cursor.fetchall()
